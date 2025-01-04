@@ -8,7 +8,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Flutter XO Game',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -90,38 +89,36 @@ class _XOGameState extends State<XOGame> {
                     : 'Winner: $_winner',
             style: TextStyle(fontSize: 24),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: GridView.builder(
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-              ),
-              itemCount: 9,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () => _handleTap(index),
-                  child: Container(
-                    margin: EdgeInsets.all(2.0),
-                    padding: EdgeInsets.all(4.0),
-                    constraints: BoxConstraints(
-                      minWidth: 40.0,
-                      minHeight: 40.0,
-                    ),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
-                      color: Colors.blueAccent,
-                    ),
-                    child: Center(
-                      child: Text(
-                        _board[index],
-                        style: TextStyle(fontSize: 24, color: Colors.white),
-                      ),
+          GridView.builder(
+            shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+            ),
+            itemCount: 9,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () => _handleTap(index),
+                child: Container(
+                  margin: EdgeInsets.all(2.0), // تقليل الهوامش
+                  padding: EdgeInsets.all(4.0), // تقليل البادينج
+                  constraints: BoxConstraints(
+                    minWidth: 60.0, // تحديد عرض ثابت
+                    minHeight: 60.0, // تحديد ارتفاع ثابت
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black),
+                    color: Colors.blueAccent,
+                  ),
+                  child: Center(
+                    child: Text(
+                      _board[index],
+                      style: TextStyle(
+                          fontSize: 36, color: Colors.white), // تصغير النص
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
           SizedBox(height: 20),
           ElevatedButton(
